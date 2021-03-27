@@ -8,13 +8,13 @@ int main()
 	setlocale(LC_ALL, "Rus");
 
 	Rational fract1;
-	cout << "Демонстация объекта 1 \t=>\t " << fract1 << endl;
+	cout << "Демонстрация объекта 1 \t=>\t " << fract1 << endl;
 
 	Rational fract2(2, 20);
-	cout << "Демонстация объекта 2 \t=>\t " << fract2 << endl;
+	cout << "Демонстрация объекта 2 \t=>\t " << fract2 << endl;
 
 	Rational fract3(4);
-	cout << "Демонстация объекта 3 \t=>\t " << fract3 << endl;
+	cout << "Демонстрация объекта 3 \t=>\t " << fract3 << endl;
 	cout << endl;
 
 	cout << "Сложение объекта 3 и объекта 2	\t=>\t " << fract3 + fract2 << endl;

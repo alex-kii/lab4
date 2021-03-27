@@ -1,61 +1,60 @@
 #include "Rational.h"
 
-Rational::Rational() 
+Rational::Rational() : nominator(0), denominator(1)
 {
-	nominator = 0;
-	denominator = 0;
+	//nominator = 0;
+	//denominator = 1;
 }
 
-Rational::Rational(int nom, int den) 
+Rational::Rational(int nom, int den) : nominator(nom / NOD(nom,den)), denominator(den / NOD(nom, den))
 {
-	int nod = NOD(nom, den);
-	nominator = nom / nod;
-	denominator = den / nod;
+	//int nod = NOD(nom, den);
+	//nominator = nom / nod;
+	//denominator = den / nod;
 }
 
-Rational::Rational(int digit)
+Rational::Rational(int digit) : nominator(digit), denominator(1)
 {
-	int nod = NOD(digit, digit);
-	nominator = digit / nod;
-	denominator = digit / nod;
+	//nominator = digit;
+	//denominator = 1;
 }
 
 Rational Rational::operator+ (const Rational& rhs) 
 {
-	Rational result;
-
-	result.nominator = this->nominator * rhs.denominator + rhs.nominator * this->denominator;
-	result.denominator = this->denominator * rhs.denominator;
+	Rational result(
+		this->nominator * rhs.denominator + rhs.nominator * this->denominator,
+		this->denominator * rhs.denominator
+	);
 
 	return result;
 }
 
 Rational Rational::operator- (const Rational& rhs) 
 {
-	Rational result;
-
-	result.nominator = this->nominator * rhs.denominator - rhs.nominator * this->denominator;
-	result.denominator = this->denominator * rhs.denominator;
+	Rational result(
+		this->nominator * rhs.denominator - rhs.nominator * this->denominator,
+		this->denominator * rhs.denominator
+	);
 
 	return result;
 }
 
 Rational Rational::operator* (const Rational& rhs) 
 {
-	Rational result;
-
-	result.nominator = this->nominator * rhs.nominator;
-	result.denominator = this->denominator * rhs.denominator;
+	Rational result(
+		this->nominator * rhs.nominator,
+		this->denominator * rhs.denominator
+	);
 
 	return result;
 }
 
 Rational Rational::operator/ (const Rational& rhs) 
 {
-	Rational result;
-
-	result.nominator = this->nominator * rhs.denominator;
-	result.denominator = this->denominator * rhs.nominator;
+	Rational result(
+		this->nominator * rhs.denominator,
+		this->denominator * rhs.nominator
+	);
 
 	return result;
 }
@@ -72,17 +71,18 @@ std::istream& operator>>(std::istream& is, Rational& obj) //Потоковый ввод
 
 std::ostream& operator<<(std::ostream& os, const Rational& obj) //Потоковый вывод 
 {
-	os << "Числитель равен " << obj.GetNominator() << "; знаменатель равен " << obj.GetDenominator();
+	os << obj.GetNominator() << "/" << obj.GetDenominator();
 
 	return os;
 }
 
 Rational y1(const Rational& x) 
 {
-	int Nom = x.GetNominator(), Den = x.GetDenominator();
+	/*int Nom = x.GetNominator(), Den = x.GetDenominator();
 	Rational left_fract(Nom, 3 * Den), right_fract(10 * Den, 2 * Den + 10 * Nom);
+	return left_fract - right_fract;*/
 
-	return left_fract - right_fract;
+	return (Rational(1, 3) * x) - Rational(1) / (Rational(2,10) + x);
 }
 
 double y2(double x) {
